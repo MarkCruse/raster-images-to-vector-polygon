@@ -25,7 +25,6 @@ These files can be plugged into the cells above to analyze land cover in other a
 | Download Name  |      Tiff File Name      |  
 |----------|:-------------:  
 NLCD_Jacksonville_area.zip | NLCD_2019_Land_Cover_L48_20210604_v1AdZOChAH6SMKC8JfEn.tiff
-NLCD_south_florida.zip | NLCD_2019_Land_Cover_L48_20210604_nqXZRL4kL9So1GA9IhWH.tiff
 NLCD_Sanibel_area.zip | NLCD_2019_Land_Cover_L48_20210604_98Ejuh2wAV8IMNpUssoI.tiff
 NLCD_Punta_Gorda_area.zip | NLCD_2019_Land_Cover_L48_20210604_6Ryotb4ak7ugzjap47E4.tiff
 
