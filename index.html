@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Land Cover Classifications - Punta Gorda, Florida</title>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <style>
+        body {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Land Cover Classifications - Punta Gorda, Florida</h1>
+    <p>Source: <a target='_blank'
+            href='https://www.mrlc.gov/data?f%5B0%5D=category%3ALand%20Cover&f%5B1%5D=region%3Aconus&f%5B2%5D=year%3A2019'>Multi-Resolution
+            Land Characteristics (MRLC) Consortium</a></p>
+    <p>Color Descriptions: <a target='_blank'
+            href='https://www.mrlc.gov/data/legends/national-land-cover-database-class-legend-and-description'>National
+            Land Cover Database Class Legend and Description
+        </a></p>
+    <p>Data Wrangling:</p>
+
+
+    <div id="map" style="width: 1000px; height: 600px;"></div>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var dataNLCD = $.ajax({
+            url: "sources/NLCD_Punta_Gorda_area_WGS84.geojson",
+            dataType: "json",
+            success: console.log("NLCD data successfully loaded."),
+            error: function (xhr) {
+                alert(xhr.statusText)
+            }
+        })
+
+
+        // Specify that this code should run once the data request is complete
+        $.when(dataNLCD).done(function () {
+            var map = L.map('map').setView([26.833327, -82.150179], 11);
+            var overlay = L.layerGroup();
+            var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href=”http://osm.org/copyright”>OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            geojson = L.geoJson(dataNLCD.responseJSON, {
+                style: style //onEachFeature: onEachFeature,
+            }).bindTooltip(function (layer) {
+                return layer.feature.properties.description;
+            }, {
+                sticky: true, // If true, the tooltip will follow the mouse instead of being fixed at the feature center.
+                opacity: 0.65
+            }).addTo(overlay).addTo(map);
+
+            var baseLayers = {
+                'OpenStreetMap': osm
+            };
+
+            var overlays = {
+                'NLCD': geojson
+            };
+
+            var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+        });
+
+
+        function style(feature) {
+            return {
+                weight: 1,
+                color: feature.properties.color,
+                fillOpacity: 0.75,
+                fillColor: feature.properties.fillColor
+            };
+        }
+
+        function tooltips(feature) {
+            return {
+                text: feature.properties.color,
+                sticky: true, // If true, the tooltip will follow the mouse instead of being fixed at the feature center.
+                opacity: 0.65
+            };
+        }
+    </script>
+</body>
+
+</html>
