@@ -2,7 +2,7 @@
 
 The purpose of this repository is to document the processes of converting raster data to vector polygons to be used within maps for evaluation purposes.
 
-This repository contains a Python Jupyter notebook to process National Land Cover Database raster data into vector polygons. The workbook automates several shell commands along with processes to add json properties to the geojson file to present the geojson data using [ipyleaflet](https://ipyleaflet.readthedocs.io/en/latest/index.html.
+This repository contains a Python Jupyter notebook to process National Land Cover Database raster data into vector polygons. The workbook automates several shell commands along with processes to add json properties to the geojson file to present the geojson data using [ipyleaflet](https://ipyleaflet.readthedocs.io/en/latest/index.html).
 
 The repository also contains a Leaflet map (index.html) that allows for further evaluation of the data in a larger format than ipyleaflet provides within the notebook.
 
@@ -13,7 +13,7 @@ The MRLC website contains a tool called [MRLC NLCD Viewer](https://www.mrlc.gov/
 #### Environment Setup
 Prior to running the Jupyter notebook, a Python environment must be created. The following are the Conda commands I used to create an environment and install the needed libraries.
 
-conda create -n NLCD
+conda create -n NLCD  
 conda install python geopandas pandas numpy jupyterlab geojson ipyleaflet
 
 #### Leaflet Map
