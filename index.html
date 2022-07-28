@@ -21,10 +21,6 @@
 
     <div id="main_content_wrap" class="outer">
         <section id="main_content" class="inner">
-            <p>The visualization below is the end result of processes created by Mark Cruse for wrangling together
-                raster data images into vector polygons. The Python notebook
-                and the Github repository (links below) provide insight into the processes.</p>
-
             <div id="map"></div>
             <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -87,28 +83,46 @@
                     };
                 }
             </script>
-    </div>
-    <section id="link_content" class="inner">
+            <p>This map is the end result of processes created by Mark Cruse for wrangling together
+                raster data images into vector polygons. The
+                <a target='_blank'
+                    href='https://github.com/MarkCruse/raster-images-to-vector-polygon/blob/a908c47db5ecd57dcc90ce6ced2924f1a1d49aaa/Create%20Vector%20Files%20from%20NLCD%20Raster%20Image.ipynb'>Python
+                    notebook</a>
+                and the <a target='_blank' href='https://github.com/MarkCruse/raster-images-to-vector-polygon'>Github
+                    repository
+                </a> provide insight into the processes.</p>
 
-        <p>Data Wrangling Notebook (HTML version):
+
+            <b>Data Wrangling Notebook (HTML version):</b>
             <a target='_blank'
                 href='https://markcruse.github.io/raster-images-to-vector-polygon/python-notebook.html'>Convert
                 NLCD Raster
                 Images to Vector Polygons
-            </a></p>
-        <p>Github Repository:
+            </a><br /><b> Repository:</b>
             <a target='_blank'
                 href='https://github.com/MarkCruse/raster-images-to-vector-polygon'>MarkCruse/raster-images-to-vector-polygon
-            </a></p>
-        <p>Data Source: <a target='_blank'
+            </a><br /><b>Data Source:</b> <a target='_blank'
                 href='https://www.mrlc.gov/data?f%5B0%5D=category%3ALand%20Cover&f%5B1%5D=region%3Aconus&f%5B2%5D=year%3A2019'>Multi-Resolution
-                Land Characteristics (MRLC) Consortium</a></p>
-        <p>Color Descriptions: <a target='_blank'
+                Land Characteristics (MRLC) Consortium</a><br /><b>Color Descriptions:</b> <a target='_blank'
                 href='https://www.mrlc.gov/data/legends/national-land-cover-database-class-legend-and-description'>National
                 Land Cover Database Class Legend and Description
             </a></p>
-        </div>
-        </div>
+
+    </div>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+        <footer class="inner">
+            <p class="copyright"><span style="text-align: left;">Maintained by <a
+                        href="https://github.com/markcruse">Mark Cruse <img src="https://github.com/MarkCruse.png"
+                            width="40" height="40" class='clipped'></a></span>
+                <span style="float: right;">Published with <a href="https://pages.github.com">GitHub
+                        Pages&nbsp;<img src="images/blacktocat.png" width="40" height="40"></a></span></p>
+
+        </footer>
+    </div>
+
 </body>
 
 </html>
