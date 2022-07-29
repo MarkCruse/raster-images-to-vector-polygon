@@ -12,8 +12,7 @@ The MRLC website contains a tool called [MRLC NLCD Viewer](https://www.mrlc.gov/
 
 #### Environment Setup
 Prior to running the Jupyter notebook, a Python environment must be created. The following are the Conda commands I used to create an environment and install the needed libraries.
-
-conda create -n NLCD  
+ 
 conda install python geopandas pandas numpy jupyterlab geojson ipyleaflet
 
 #### Leaflet Map
