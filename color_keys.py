@@ -54,7 +54,7 @@ legend_dict = {
     "31 Barren Land (Rock/Sand/Clay)": "#B3AFA4",
     "41 Deciduous Forest": "#6CA966",
     "42 Evergreen Forest": "#1D6533",
-    "43 Mixed Forest": "#1D6533",
+    "43 Mixed Forest": "#D4E7B0",
     "51 Dwarf Scrub": "#B29A42",
     "52 Shrub/Scrub": "#D1BB82",
     "71 Grassland/Herbaceous": "#EDECCD",
