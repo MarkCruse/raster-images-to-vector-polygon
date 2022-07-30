@@ -88,11 +88,13 @@
                     legend.onAdd = function (map) {
 
                         var div = L.DomUtil.create('div', 'info legend');
+                        div.innerHTML =
+                            '<center><strong> Land Cover Classifications </strong></center>';
 
                         // loop through our density intervals and generate a label with a colored square for each interval
                         for (var i = 0; i < uniqueCodes.length; i++) {
                             div.innerHTML += '<i style="background:' + getColor(uniqueCodes[i]) +
-                                '"></i> ' + (getDescription(uniqueCodes[i]) + '<br>');
+                                ' "></i> ' + (getDescription(uniqueCodes[i]) + '<br>');
                         }
                         return div;
                     };
