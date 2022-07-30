@@ -54,6 +54,23 @@
                         opacity: 0.65
                     }).addTo(overlay).addTo(map);
 
+                    // loop through features to get unique properties.DN and corresponding colors
+                    const codesUsed = [];
+                    var legendText, colorCode;
+                    L.geoJson(dataNLCD.responseJSON, {
+                        onEachFeature: function (feature, layer) {
+                            colorCode = feature.properties.DN
+                            //var codeDesc = feature.properties.description
+                            //var color = getColor(colorCode);
+                            codesUsed.push(colorCode)
+                            //legendText = color + " " + colorCode + " - " + codeDesc
+                        }
+                    });
+                    var uniqueCodes = codesUsed.filter(onlyUnique);
+                    //console.log(legendText);
+                    uniqueCodes = uniqueCodes.sort();
+                    //console.log(uniqueCodes);
+
                     var baseLayers = {
                         'OpenStreetMap': osm
                     };
@@ -63,8 +80,28 @@
                     };
 
                     var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+                    var legend = L.control({
+                        position: 'bottomright'
+                    });
+
+                    legend.onAdd = function (map) {
+
+                        var div = L.DomUtil.create('div', 'info legend');
+
+                        // loop through our density intervals and generate a label with a colored square for each interval
+                        for (var i = 0; i < uniqueCodes.length; i++) {
+                            div.innerHTML += '<i style="background:' + getColor(uniqueCodes[i]) +
+                                '"></i> ' + (getDescription(uniqueCodes[i]) + '<br>');
+                        }
+                        return div;
+                    };
+                    legend.addTo(map);
                 });
 
+                function onlyUnique(value, index, self) {
+                    return self.indexOf(value) === index;
+                }
 
                 function style(feature) {
                     return {
@@ -81,6 +118,54 @@
                         sticky: true, // If true, the tooltip will follow the mouse instead of being fixed at the feature center.
                         opacity: 0.65
                     };
+                }
+
+                function getColor(d) {
+                    return d == 11 ? '#5475A8' :
+                        d == 12 ? '#FFFFFF' :
+                        d == 21 ? '#E8D1D1' :
+                        d == 22 ? '#E29E8C' :
+                        d == 23 ? '#DC9881' :
+                        d == 24 ? '#F11A00' :
+                        d == 31 ? '#B3AFA4' :
+                        d == 41 ? '#6CA966' :
+                        d == 42 ? '#1D6533' :
+                        d == 43 ? '#D4E7B0' :
+                        d == 51 ? '#B29A42' :
+                        d == 52 ? '#D1BB82' :
+                        d == 71 ? '#EDECCD' :
+                        d == 72 ? '#D0D181' :
+                        d == 73 ? '#A4CC50' :
+                        d == 74 ? '#82BA9D' :
+                        d == 81 ? '#DDD83F' :
+                        d == 82 ? '#AE7229' :
+                        d == 90 ? '#BBD7ED' :
+                        d == 95 ? '#71A4C1' :
+                        '#FFEDA0';
+                }
+
+                function getDescription(d) {
+                    return d == 11 ? "11 - Open Water" :
+                        d == 12 ? "12 - Perennial Ice/Snow" :
+                        d == 21 ? "21 - Developed Open Space" :
+                        d == 22 ? "22 - Developed Low Intensity" :
+                        d == 23 ? "23 - Developed Medium Intensity" :
+                        d == 24 ? "24 - Developed High Intensity" :
+                        d == 31 ? "31 - Barren Land (Rock/Sand/Clay)" :
+                        d == 41 ? "41 - Deciduous Forest" :
+                        d == 42 ? "42 - Evergreen Forest" :
+                        d == 43 ? "43 - Mixed Forest" :
+                        d == 51 ? "51 - Dwarf Scrub" :
+                        d == 52 ? "52 - Shrub/Scrub" :
+                        d == 71 ? "71 - Grassland/Herbaceous" :
+                        d == 72 ? "72 - Sedge/Herbaceous" :
+                        d == 73 ? "73 - Lichens" :
+                        d == 74 ? "74 - Moss" :
+                        d == 81 ? "81 - Pasture/Hay" :
+                        d == 82 ? "82 - Cultivated Crops" :
+                        d == 90 ? "90 - Woody Wetlands" :
+                        d == 95 ? "95 - Emergent Herbaceous Wetlands" :
+                        "undefined";
                 }
             </script>
             <p>This map is the end result of processes created by Mark Cruse for wrangling together
