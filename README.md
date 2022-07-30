@@ -1,4 +1,4 @@
-# raster-images-to-vector-polygon
+# raster-images-to-vector-polygons
 
 The purpose of this repository is to document the processes of converting raster data to vector polygons to be used within maps for evaluation purposes.
 
@@ -12,8 +12,7 @@ The MRLC website contains a tool called [MRLC NLCD Viewer](https://www.mrlc.gov/
 
 #### Environment Setup
 Prior to running the Jupyter notebook, a Python environment must be created. The following are the Conda commands I used to create an environment and install the needed libraries.
-
-conda create -n NLCD  
+ 
 conda install python geopandas pandas numpy jupyterlab geojson ipyleaflet
 
 #### Leaflet Map
