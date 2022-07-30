@@ -200,7 +200,7 @@ Full-Width Styles
 }
 
 #header_wrap .inner {
-  padding: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 20px;
 }
 
 #project_title {
@@ -229,7 +229,7 @@ Full-Width Styles
 .legend {
   line-height: 18px;
   color: rgb(0, 0, 0);
-  background: rgb(222, 221, 221);
+  background: #f2efea;
   opacity: 0.8;
 }
 .legend i {
@@ -242,12 +242,13 @@ Full-Width Styles
 
 #main_content_wrap {
   background: #f2f2f2;
-  border-top: 1px solid #111;
-  border-bottom: 1px solid #111;
+  border-top: 0px solid #111;
+  border-bottom: 0px solid #111;
 }
 
 #main_content {
   padding: 10px;
+  max-width: 950px;
 }
 
 #footer_wrap {

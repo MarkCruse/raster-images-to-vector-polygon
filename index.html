@@ -27,7 +27,7 @@
                 integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
             <script type="text/javascript">
-                var dataNLCD = $.ajax({
+                var dataNLCD = $.ajax({ // get the geojson data from sources folder
                     url: "sources/NLCD_Punta_Gorda_area_WGS84.geojson",
                     dataType: "json",
                     success: console.log("NLCD data successfully loaded."),
@@ -46,30 +46,13 @@
                     }).addTo(map);
 
                     geojson = L.geoJson(dataNLCD.responseJSON, {
-                        style: style //onEachFeature: onEachFeature,
+                        style: style //call the function styles to add coloring to polygons
                     }).bindTooltip(function (layer) {
-                        return layer.feature.properties.description;
+                        return layer.feature.properties.description; // add tooltip
                     }, {
                         sticky: true, // If true, the tooltip will follow the mouse instead of being fixed at the feature center.
                         opacity: 0.65
                     }).addTo(overlay).addTo(map);
-
-                    // loop through features to get unique properties.DN and corresponding colors
-                    const codesUsed = [];
-                    var legendText, colorCode;
-                    L.geoJson(dataNLCD.responseJSON, {
-                        onEachFeature: function (feature, layer) {
-                            colorCode = feature.properties.DN
-                            //var codeDesc = feature.properties.description
-                            //var color = getColor(colorCode);
-                            codesUsed.push(colorCode)
-                            //legendText = color + " " + colorCode + " - " + codeDesc
-                        }
-                    });
-                    var uniqueCodes = codesUsed.filter(onlyUnique);
-                    //console.log(legendText);
-                    uniqueCodes = uniqueCodes.sort();
-                    //console.log(uniqueCodes);
 
                     var baseLayers = {
                         'OpenStreetMap': osm
@@ -81,10 +64,22 @@
 
                     var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
 
+                    // ***** Unique values in Legend **** //
+                    // loop through features to get unique properties.DN and corresponding colors
+                    const codesUsed = [];
+                    var legendText, colorCode;
+                    L.geoJson(dataNLCD.responseJSON, {
+                        onEachFeature: function (feature, layer) {
+                            colorCode = feature.properties.DN
+                            codesUsed.push(colorCode)
+                        }
+                    });
+                    var uniqueCodes = codesUsed.filter(onlyUnique);
+                    uniqueCodes = uniqueCodes.sort();
+
                     var legend = L.control({
                         position: 'bottomright'
                     });
-
                     legend.onAdd = function (map) {
 
                         var div = L.DomUtil.create('div', 'info legend');
@@ -100,12 +95,12 @@
                     };
                     legend.addTo(map);
                 });
-
+                // *** Functions *** //
                 function onlyUnique(value, index, self) {
                     return self.indexOf(value) === index;
                 }
 
-                function style(feature) {
+                function style(feature) { //colors the polygons
                     return {
                         weight: 1,
                         color: feature.properties.color,
@@ -114,15 +109,7 @@
                     };
                 }
 
-                function tooltips(feature) {
-                    return {
-                        text: feature.properties.color,
-                        sticky: true, // If true, the tooltip will follow the mouse instead of being fixed at the feature center.
-                        opacity: 0.65
-                    };
-                }
-
-                function getColor(d) {
+                function getColor(d) { //color codes for use with legend
                     return d == 11 ? '#5475A8' :
                         d == 12 ? '#FFFFFF' :
                         d == 21 ? '#E8D1D1' :
@@ -146,7 +133,7 @@
                         '#FFEDA0';
                 }
 
-                function getDescription(d) {
+                function getDescription(d) { //descriptions for legend
                     return d == 11 ? "11 - Open Water" :
                         d == 12 ? "12 - Perennial Ice/Snow" :
                         d == 21 ? "21 - Developed Open Space" :
